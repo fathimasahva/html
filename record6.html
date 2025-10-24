@@ -1,0 +1,104 @@
+<html>
+<center>
+<body bgcolor="plum">
+<h1>STRING AND MATH FUNCTION</h1>
+</center>
+
+<h2><font color="blue">MATH FUNCTION</font></h2>
+
+random is &nbsp;:-&emsp;<span id="p1"></span>
+<script>
+document.getElementById('p1').innerHTML=Math.random();
+
+</script>
+<br>
+<br>
+square root of 144 is &nbsp;:-&emsp;<span id="p2"></span>
+
+<script>
+document.getElementById('p2').innerHTML=Math.sqrt(144);
+</script>
+
+<br>
+<br>
+power(2,3) is &nbsp;:-&emsp;<span id="p3"></span>
+
+<script>
+document.getElementById('p3').innerHTML=Math.pow(2,3);
+</script>
+<br>
+<br>
+floor value of 5.6 is &nbsp;:-&emsp;<span id="p4"></span>
+
+<script>
+document.getElementById('p4').innerHTML=Math.floor(5.6);
+</script>
+<br>
+<br>
+ceil value of 5.3 is &nbsp;:-&emsp;<span id="p5"></span>
+
+<script>
+document.getElementById('p5').innerHTML=Math.ceil(5.3);
+</script>
+
+<br>
+<br>
+round value of 3.6 is &nbsp;:-&emsp;<span id="p6"></span>
+
+<script>
+document.getElementById('p6').innerHTML=Math.round(3.6);
+</script>
+
+<br>
+<br>
+absolute value of -2.6 is &nbsp;:-&emsp;<span id="p7"></span>
+
+<script>
+document.getElementById('p7').innerHTML=Math.abs(-2.6);
+</script>
+
+
+
+
+
+
+
+
+<h2><font color="blue">STRING FUNCTION</font></h2>
+<script>
+var str="sahva"
+document.write("string is:"+" "+str)
+
+
+document.write("<br>"+"position at 2 is : "+str.charAt(2));
+document.write("<br><br>");
+
+
+
+var s1="javascript ";
+var s2="concat of example";
+var s3=s1.concat(s2);
+document.write("string 1:"+s1);
+document.write("<br>");
+document.write("string 2:"+s2);
+document.write("<br>");
+document.write("1.concatination : "+s3);
+
+document.write("<br><br>");
+
+var n=s2.indexOf("example");
+document.write("2.example in ' concat of example ' : "+n);
+document.write("<br><br>");
+
+var n=s2.lastIndexOf("of");
+document.write("3.last index of 'of' in 'concat of example'  is "+" : "+n);
+document.write("<br><br>"); 
+
+var s2=s1.toUpperCase();
+document.write("4.javascript to upper case:"+s2);
+
+
+
+</script>
+</body>
+</html>
