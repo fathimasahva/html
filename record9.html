@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>
+mouse over
+</title>
+<script>
+function changeContent(){
+document.getElementById("myimage").src="birds.jpg";
+document.getElementById("mytext").innerHTML="after mouse over.";
+}
+function originalContent(){
+document.getElementById("myimage").src="img3.jpg";
+document.getElementById("mytext").innerHTML="move your mouse over the image to see the change.";
+}
+</script>
+</head>
+<body>
+<center>
+<h2 id="mytext">move your mouse over the image to see the change.</h2>
+<img id="myimage" src="img3.jpg" width="200px" height="200px"
+onmouseover="changeContent()"
+onmouseout="originalContent()"
+style="curser:pointer;border:2px solid black;">
+</center>
+</body>
+</html>
+
