@@ -1,0 +1,166 @@
+<html>
+<head>
+<title>Online Exam</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 40px; }
+h2 { color: #333; }
+#question { font-weight: bold; margin-bottom: 10px; }
+button { margin-top: 10px; padding: 6px 15px; cursor: pointer; }
+#result { font-size: 18px; color: green; margin-top: 20px; }
+#timer { font-size: 20px; color: red; font-weight: bold; margin-bottom: 15px; }
+</style>
+</head>
+<body>
+
+<center><em><h1>Online Exam</h1></em></center>
+<div id="timer">Time left: 60s</div>
+
+<div id="question"></div>
+
+<form id="quizForm">
+<input type="radio" name="option" value="0" id="opt0"> <label id="lbl0"></label><br>
+<input type="radio" name="option" value="1" id="opt1"> <label id="lbl1"></label><br>
+<input type="radio" name="option" value="2" id="opt2"> <label id="lbl2"></label><br>
+<input type="radio" name="option" value="3" id="opt3"> <label id="lbl3"></label><br><br>
+
+<button type="button" onclick="nextQuestion()">Next</button>
+</form>
+
+<p id="result"></p>
+
+<script>
+var questions = [
+{
+question: "What does HTML stand for?",
+options: ["Hyperlinks and Text Markup Language", "Hyper Text Markup Language", "Home Tool Markup Language", "Hyper Text Managing Language"],
+answer: 1
+},
+{
+question: "Which language is used for styling web pages?",
+options: ["HTML", "CSS", "JavaScript", "Python"],
+answer: 1
+},
+{
+question: "Which company developed JavaScript?",
+options: ["Netscape", "Microsoft", "Google", "Apple"],
+answer: 0
+},
+{
+question: "Which of these is not a correct HTML tag?",
+options: ["&lt;b&gt;", "&lt;body&gt;", "&lt;h1&gt;", "&lt;color&gt;"],
+answer: 3
+},
+{
+question: "What does CSS stand for?",
+options: ["Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets", "Computer Style Sheets"],
+answer: 1
+},
+{
+question: "Which tag is used to create a hyperlink in HTML?",
+options: ["&lt;link&gt;", "&lt;a&gt;", "&lt;href&gt;", "&lt;url&gt;"],
+answer: 1
+},
+{
+question: "Inside which HTML element do we put the JavaScript?",
+options: ["&lt;script&gt;", "&lt;js&gt;", "&lt;javascript&gt;", "&lt;code&gt;"],
+answer: 0
+},
+{
+question: "Which symbol is used for comments in JavaScript?",
+options: ["//", "/*", "#", "&lt;!-- --&gt;"],
+answer: 0
+},
+{
+question: "Which property is used to change text color in CSS?",
+options: ["font-color", "color", "text-color", "background-color"],
+answer: 1
+},
+{
+question: "Which HTML attribute specifies an alternate text for an image?",
+options: ["title", "alt", "src", "href"],
+answer: 1
+}
+];
+
+var current = 0;
+var score = 0;
+var timeLeft = 60; // 60 seconds
+var timerInterval;
+var startTime, endTime;
+
+function showQuestion() {
+var q = questions[current];
+document.getElementById("question").innerHTML = (current + 1) + ". " + q.question;
+document.getElementById("lbl0").innerHTML = q.options[0];
+document.getElementById("lbl1").innerHTML = q.options[1];
+document.getElementById("lbl2").innerHTML = q.options[2];
+document.getElementById("lbl3").innerHTML = q.options[3];
+document.getElementById("quizForm").reset();
+
+if (current === 0 && !timerInterval) {
+startTime = new Date();
+startTimer();
+}
+}
+
+function startTimer() {
+timerInterval = setInterval(function() {
+timeLeft--;
+document.getElementById("timer").innerHTML = "Time left: " + timeLeft + "s";
+
+if (timeLeft <= 0) {
+clearInterval(timerInterval);
+endQuiz(true);  
+}
+}, 1000);
+}
+
+function nextQuestion() {
+var selected = document.querySelector('input[name="option"]:checked');
+if (!selected) {
+alert("Please choose an answer!");
+return;
+}
+
+if (parseInt(selected.value) === questions[current].answer) {
+score++;
+}
+
+current++;
+if (current < questions.length) {
+showQuestion();
+} else {
+endQuiz(false);
+}
+}
+
+function endQuiz(autoSubmitted) {
+endTime = new Date();
+clearInterval(timerInterval);
+
+var totalSeconds = Math.floor((endTime - startTime) / 1000);
+var minutes = Math.floor(totalSeconds / 60);
+var seconds = totalSeconds % 60;
+
+document.getElementById("question").style.display = "none";
+document.getElementById("quizForm").style.display = "none";
+document.getElementById("timer").style.display = "none";
+
+var msg = autoSubmitted
+? "<b> Time’s up!</b><br>"
+: "<center><b> Quiz Completed!</b></center><br><br>";
+
+document.getElementById("result").innerHTML =
+msg +
+"Started at: " + startTime.toLocaleTimeString() + "<br><br>" +
+"Ended at: " + endTime.toLocaleTimeString() + "<br><br>" +
+"Total time taken: " + minutes + " min " + seconds + " sec<br><br><br><br>" +
+" <center>You scored " + "<h1>"+score + " <h3>out of " + questions.length;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
+
